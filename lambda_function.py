@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 
 
-import logging
+
+#-------------------------------------------------------------------------
+#
+# Importing Modules Used
+#
+#-------------------------------------------------------------------------
+
+#import logging
 import json
 import ask_sdk_core.utils as ask_utils
 
@@ -28,16 +35,30 @@ from dialogue import alexa_responses, lumpia_recipe
 from utils import create_presigned_url # to use with intent: image_url = create_presigned_url("Media/image.png")
 from utils import get_all_entitled_products, is_product, is_entitled, in_skill_product_response, get_speakable_list_of_products
 
+# Set logging -----
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 skill_name = "Faraway Food Planner"
 
+#-------------------------------------------------------------------------
+#
+# Helper Functions
+#
+#-------------------------------------------------------------------------
 def _load_apl_document(file_path):
     # type: (str) -> Dict[str, Any]
     """Load the apl json document at the path into a dict object."""
     with open(file_path) as f:
         return json.load(f)
 
+
+#-------------------------------------------------------------------------
+#
+# Intent Handlers
+#
+#-------------------------------------------------------------------------
+
+# Launch Request Handler
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""
     def can_handle(self, handler_input):
@@ -84,7 +105,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
-
+# Create Meal Plan Handler: 'View countries'
 class CreateMealPlanIntentHandler(AbstractRequestHandler):
     """Handler for CreateMealPlan Intent."""
     def can_handle(self, handler_input):
@@ -120,6 +141,7 @@ class CreateMealPlanIntentHandler(AbstractRequestHandler):
                 .response
         )
 
+# Recipe Intent Handler: 'How do I make Lumpia?'
 class RecipeIntentHandler(AbstractRequestHandler):
     """Handler for RecipeIntent"""
     def can_handle(self, handler_input):
@@ -162,6 +184,7 @@ class RecipeIntentHandler(AbstractRequestHandler):
                 .response
         )
 
+# Country Selector Handler: 'Show me recipes from Thailand'
 class CountrySelectorIntentHandler(AbstractRequestHandler):
     """Handler for CountrySelector Intent."""
     def can_handle(self, handler_input):
@@ -243,6 +266,7 @@ class CountrySelectorIntentHandler(AbstractRequestHandler):
                     .response
             )
 
+# Previous Intent Handler: 'Go Back'
 class PreviousIntentHandler(AbstractRequestHandler):
     """Handler for Previous Intent."""
     def can_handle(self, handler_input):
@@ -271,7 +295,7 @@ class PreviousIntentHandler(AbstractRequestHandler):
         elif session_attr["intent_history"][-1] == "Launch":
             return LaunchRequestHandler.handle(self, handler_input)
 
-
+# Touch Screen Button Handler: Touch Response on Echo Show
 class confirmTouchIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return (
@@ -377,7 +401,11 @@ class confirmTouchIntentHandler(AbstractRequestHandler):
             )
 
 
-# --- ISP Intent Handlers
+#-------------------------------------------------------------------------
+#
+# ISP Intent Handlers
+#
+#-------------------------------------------------------------------------
 class ShoppingHandler(AbstractRequestHandler):
     """
     Following handler demonstrates how skills can handle user requests to
@@ -513,7 +541,11 @@ class BuyResponseHandler(AbstractRequestHandler):
                     "Please try again or contact us for help").response
 
 
-# --- AMAZON Default Handlers
+#-------------------------------------------------------------------------
+#
+# Default Handlers
+#
+#-------------------------------------------------------------------------
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
     def can_handle(self, handler_input):
@@ -630,7 +662,6 @@ class ResponseLogger(AbstractResponseInterceptor):
 # The SkillBuilder object acts as the entry point for your skill, routing all request and response
 # payloads to the handlers above. Make sure any new handlers or interceptors you've
 # defined are included below. The order matters - they're processed top to bottom.
-
 
 
 sb = CustomSkillBuilder(api_client=DefaultApiClient())
