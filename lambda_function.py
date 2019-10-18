@@ -444,7 +444,6 @@ class ShoppingHandler(AbstractRequestHandler):
             return handler_input.response_builder.speak(speech).ask(
                 reprompt).response
 
-
 class UpsellResponseHandler(AbstractRequestHandler):
     """This handles the Connections.Response event after an upsell occurs."""
     def can_handle(self, handler_input):
