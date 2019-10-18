@@ -370,13 +370,13 @@
                 "largeSourceUrl": null,
                 "sources": [
                     {
-                        "url": "https://d2o906d8ln7ui1.cloudfront.net/images/LT1_Background.png",
+                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/bg_countries.png",
                         "size": "small",
                         "widthPixels": 0,
                         "heightPixels": 0
                     },
                     {
-                        "url": "https://d2o906d8ln7ui1.cloudfront.net/images/LT1_Background.png",
+                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/bg_countries.png",
                         "size": "large",
                         "widthPixels": 0,
                         "heightPixels": 0
@@ -389,24 +389,24 @@
         "listTemplate1ListData": {
             "type": "list",
             "listId": "lt1Sample",
-            "totalNumberOfItems": 10,
+            "totalNumberOfItems": 3,
             "listPage": {
                 "listItems": [
                     {
-                        "listItemIdentifier": "thailand",
+                        "listItemIdentifier": "Guatemala",
                         "ordinalNumber": 1,
                         "textContent": {
                             "primaryText": {
                                 "type": "PlainText",
-                                "text": "Thailand"
+                                "text": "Guatemala"
                             },
                             "secondaryText": {
                                 "type": "PlainText",
-                                "text": "Featured Dish: Khao Soi"
+                                "text": "Featured Dish: Pepían"
                             },
                             "tertiaryText": {
                                 "type": "PlainText",
-                                "text": "8 Recipes"
+                                "text": "3 Recipes"
                             }
                         },
                         "image": {
@@ -415,20 +415,20 @@
                             "largeSourceUrl": null,
                             "sources": [
                                 {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_khaosoi.jpeg",
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pepian.jpeg",
                                     "size": "small",
                                     "widthPixels": 0,
                                     "heightPixels": 0
                                 },
                                 {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_khaosoi.jpeg",
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pepian.jpeg",
                                     "size": "large",
                                     "widthPixels": 0,
                                     "heightPixels": 0
                                 }
                             ]
                         },
-                        "token": "thailand"
+                        "token": "guatemala"
                     },
                     {
                         "listItemIdentifier": "peru",
@@ -469,122 +469,8 @@
                         "token": "peru"
                     },
                     {
-                        "listItemIdentifier": "england",
-                        "ordinalNumber": 3,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "England"
-                            },
-                            "secondaryText": {
-                                "type": "RichText",
-                                "text": "Featured Dish: Fish and Chips"
-                            },
-                            "tertiaryText": {
-                                "type": "PlainText",
-                                "text": "6 Recipes"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_fishandchips.jpg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_fishandchips.jpg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "england"
-                    },
-                    {
-                        "listItemIdentifier": "france",
-                        "ordinalNumber": 4,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "France"
-                            },
-                            "secondaryText": {
-                                "type": "RichText",
-                                "text": "Featured Dish: Quiche Lorraine"
-                            },
-                            "tertiaryText": {
-                                "type": "PlainText",
-                                "text": "7 Recipes"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_quiche.jpg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_quiche.jpg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "france"
-                    },
-                    {
-                        "listItemIdentifier": "guatemala",
-                        "ordinalNumber": 5,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "Guatemala"
-                            },
-                            "secondaryText": {
-                                "type": "RichText",
-                                "text": "Featured Dish: Pepían"
-                            },
-                            "tertiaryText": {
-                                "type": "PlainText",
-                                "text": "5 Recipes"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_pepian.jpg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_pepian.jpg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "guatemala"
-                    },
-                    {
                         "listItemIdentifier": "philippines",
-                        "ordinalNumber": 6,
+                        "ordinalNumber": 3,
                         "textContent": {
                             "primaryText": {
                                 "type": "PlainText",
@@ -596,7 +482,7 @@
                             },
                             "tertiaryText": {
                                 "type": "PlainText",
-                                "text": "7 Recipes"
+                                "text": "3 Recipes"
                             }
                         },
                         "image": {
@@ -605,13 +491,13 @@
                             "largeSourceUrl": null,
                             "sources": [
                                 {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_pancit.jpg",
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pancit.jpg",
                                     "size": "small",
                                     "widthPixels": 0,
                                     "heightPixels": 0
                                 },
                                 {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_pancit.jpg",
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pancit.jpg",
                                     "size": "large",
                                     "widthPixels": 0,
                                     "heightPixels": 0
