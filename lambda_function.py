@@ -8,7 +8,7 @@
 #
 #-------------------------------------------------------------------------
 
-#import logging
+import logging
 import json
 import ask_sdk_core.utils as ask_utils
 
@@ -117,11 +117,12 @@ class CreateMealPlanIntentHandler(AbstractRequestHandler):
 
         session_attr = handler_input.attributes_manager.session_attributes
         if "intent_history" in session_attr.keys():
-            session_attr["intent_history"].append("CreateMealPlanIntent")
+            if session_attr["intent_history"][-1] != "CreateMealPlanIntent":
+                session_attr["intent_history"].append("CreateMealPlanIntent")
         else:
             session_attr["intent_history"] = ["Launch", "CreateMealPlanIntent"]
 
-        speak_output = alexa_responses.STARTPLAN
+        speak_output = alexa_responses.COUNTRIES_PROMPT
         # card_title = "Select a Country"
         # card_text = alexa_responses.country_text
         apl_document = _load_apl_document("./apl/countries.json")
@@ -134,49 +135,6 @@ class CreateMealPlanIntentHandler(AbstractRequestHandler):
                 .add_directive(
                     RenderDocumentDirective(
                         token = "countries",
-                        document = apl_document["document"],
-                        datasources = apl_document["datasources"]
-                    )
-                )
-                .response
-        )
-
-# Recipe Intent Handler: 'How do I make Lumpia?'
-class RecipeIntentHandler(AbstractRequestHandler):
-    """Handler for RecipeIntent"""
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("RecipeIntent")(handler_input)
-
-    def handle(self, handler_input):
-        # type: (HandlerInput) -> Response
-
-        session_attr = handler_input.attributes_manager.session_attributes
-        if "intent_history" in session_attr.keys():
-            session_attr["intent_history"].append("RecipeIntent")
-        else:
-            session_attr["intent_history"] = ["Launch", "CreateMealPlanIntent", "CountrySelectorIntent", "RecipeIntent"]
-
-        # country attribute
-        selected_recipe = ask_utils.get_slot_value(handler_input, "food")
-        logger.info("SELECTED RECIPE = {}".format(selected_recipe))
-
-        selected_recipe_lower = selected_recipe.lower()
-
-        session_attr["recipe"] = selected_recipe
-
-
-        # response to country selection - FREE OR PAID UP CONTENT
-        speak_output = "Here is what I found for {}.".format(selected_recipe)
-        apl_document = _load_apl_document("./apl/{}.json".format(selected_recipe_lower))
-
-        return (
-            handler_input.response_builder
-                .speak(speak_output)
-                .ask(speak_output)
-                .add_directive(
-                    RenderDocumentDirective(
-                        token = "selected_recipe",
                         document = apl_document["document"],
                         datasources = apl_document["datasources"]
                     )
@@ -228,7 +186,8 @@ class CountrySelectorIntentHandler(AbstractRequestHandler):
                 else:
                     upsell_msg = (
                         "This selection contains premium content. "
-                        "You are not a premium member. Would you hear how to unlock premium content?"
+                        "You are not a premium member. Would you like to "
+                        "hear how to unlock premium content?"
                     )
 
                     return (
@@ -266,6 +225,49 @@ class CountrySelectorIntentHandler(AbstractRequestHandler):
                     .response
             )
 
+# Recipe Intent Handler: 'Lumpia'
+class RecipeIntentHandler(AbstractRequestHandler):
+    """Handler for RecipeIntent"""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("RecipeIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+
+        session_attr = handler_input.attributes_manager.session_attributes
+        if "intent_history" in session_attr.keys():
+            session_attr["intent_history"].append("RecipeIntent")
+        else:
+            session_attr["intent_history"] = ["Launch", "CreateMealPlanIntent", "CountrySelectorIntent", "RecipeIntent"]
+
+        # country attribute
+        selected_recipe = ask_utils.get_slot_value(handler_input, "food")
+        logger.info("SELECTED RECIPE = {}".format(selected_recipe))
+
+        selected_recipe_lower = selected_recipe.lower()
+
+        session_attr["recipe"] = selected_recipe
+
+
+        # response to country selection - FREE OR PAID UP CONTENT
+        speak_output = "Here is what I found for {}.".format(selected_recipe)
+        apl_document = _load_apl_document("./apl/{}.json".format(selected_recipe_lower))
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .ask(speak_output)
+                .add_directive(
+                    RenderDocumentDirective(
+                        token = "selected_recipe",
+                        document = apl_document["document"],
+                        datasources = apl_document["datasources"]
+                    )
+                )
+                .response
+        )
+
 # Previous Intent Handler: 'Go Back'
 class PreviousIntentHandler(AbstractRequestHandler):
     """Handler for Previous Intent."""
@@ -286,8 +288,10 @@ class PreviousIntentHandler(AbstractRequestHandler):
                     .ask(speak_output)
                     .response
             )
-        elif session_attr["intent_history"][-1] in ["CreateMealPlanIntent", "CountrySelectorIntent"]:
+        elif session_attr["intent_history"][-1] == "CreateMealPlanIntent":
             session_attr["intent_history"].pop()
+            return CreateMealPlanIntentHandler.handle(self, handler_input)
+        elif session_attr["intent_history"][-1] == "CountrySelectorIntent":
             return CreateMealPlanIntentHandler.handle(self, handler_input)
         elif session_attr["intent_history"][-1] in ["RecipeIntent","MakeRecipe"]:
             session_attr["intent_history"].pop()

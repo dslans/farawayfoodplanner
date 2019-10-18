@@ -14,6 +14,10 @@ countries_available = [
     'Philippines'
     ]
 
+COUNTRIES_PROMPT = ("There are meal plans available from the following "
+                    "countries: {}. Please select one to get "
+                    "started.").format(', '.join(countries_available))
+
 recipes_available = [
     'Lumpia'
     ]

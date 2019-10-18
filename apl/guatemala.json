@@ -30,7 +30,6 @@
                     "textSizeBody": 48,
                     "textSizePrimary": 27,
                     "textSizeSecondary": 23,
-                    "textSizeDetails": 20,
                     "textSizeSecondaryHint": 25
                 }
             },
@@ -50,7 +49,7 @@
                     "marginTop": 40,
                     "marginLeft": 60,
                     "marginRight": 60,
-                    "marginBottom": 60
+                    "marginBottom": 40
                 }
             }
         ],
@@ -77,13 +76,6 @@
                     "fontWeight": "300"
                 }
             },
-            "textStyleBase2": {
-                "description": "Regular version of basic font",
-                "extend": "textStyleBase",
-                "values": {
-                    "fontWeight": "500"
-                }
-            },
             "mixinBody": {
                 "values": {
                     "fontSize": "@textSizeBody"
@@ -94,14 +86,9 @@
                     "fontSize": "@textSizePrimary"
                 }
             },
-            "mixinDetails": {
-                "values": {
-                    "fontSize": "@textSizeSecondary"
-                }
-            },
             "mixinSecondary": {
                 "values": {
-                    "fontSize": "@textSizeDetails"
+                    "fontSize": "@textSizeSecondary"
                 }
             },
             "textStylePrimary": {
@@ -129,367 +116,318 @@
                     "fontSize": "@textSizeSecondaryHint",
                     "color": "@colorTextPrimary"
                 }
-            },
-            "textStyleLabels": {
-                "extend": [
-                    "textStyleBase2",
-                    "mixinDetails"
-                ]
             }
         },
         "onMount": [],
         "graphics": {},
         "commands": {},
-        "layouts": {
-            "FullHorizontalListItem": {
-                "parameters": [
-                    "listLength"
-                ],
-                "item": [
-                    {
-                        "type": "Container",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "alignItems": "center",
-                        "justifyContent": "end",
-                        "items": [
-                            {
-                                "type": "Image",
-                                "width": "100vw",
-                                "height": "100vh",
-                                "source": "${data.image.sources[0].url}",
-                                "scale": "best-fill",
-                                "overlayColor": "rgba(0, 0, 0, 0.6)",
-                                "position": "absolute"
-                            },
-                            {
-                                "type": "AlexaHeader",
-                                "headerTitle": "${title}",
-                                "headerAttributionImage": "${logo}",
-                                "grow": 1
-                            },
-                            {
-                                "type": "Text",
-                                "text": "${data.textContent.primaryText.text}",
-                                "style": "textStyleBody",
-                                "maxLines": 1
-                            },
-                            {
-                                "type": "Text",
-                                "text": "${data.textContent.secondaryText.text}",
-                                "style": "textStyleDetails"
-                            },
-                            {
-                                "type": "Text",
-                                "text": "${ordinal} | ${listLength}",
-                                "paddingBottom": "20dp",
-                                "color": "white",
-                                "spacing": "5dp"
-                            }
-                        ]
-                    }
-                ]
-            },
-            "HorizontalListItem": {
-                "parameters": [
-                    ""
-                ],
-                "item": [
-                    {
-                        "type": "Container",
-                        "maxWidth": 528,
-                        "minWidth": 312,
-                        "paddingLeft": 16,
-                        "paddingRight": 16,
-                        "height": "100%",
-                        "items": [
-                            {
-                                "type": "Image",
-                                "source": "${data.image.sources[0].url}",
-                                "height": "40vh",
-                                "width": "40vh"
-                            },
-                            {
-                                "type": "Text",
-                                "text": "<b>${ordinal}.</b> ${data.textContent.primaryText.text}",
-                                "style": "textStyleLabels",
-                                "maxLines": 1,
-                                "spacing": 12
-                            },
-                            {
-                                "type": "Text",
-                                "text": "${data.textContent.secondaryText.text}",
-                                "style": "textStyleSecondary",
-                                "spacing": 4
-                            }
-                        ]
-                    }
-                ]
-            },
-            "ListTemplate2": {
-                "parameters": [
-                    "backgroundImage",
-                    "title",
-                    "logo",
-                    "hintText",
-                    "listData"
-                ],
-                "items": [
-                    {
-                        "when": "${viewport.shape == 'round'}",
-                        "type": "Container",
-                        "height": "100%",
-                        "width": "100%",
-                        "items": [
-                            {
-                                "type": "Sequence",
-                                "scrollDirection": "horizontal",
-                                "data": "${listData}",
-                                "height": "100%",
-                                "width": "100%",
-                                "numbered": true,
-                                "item": [
-                                    {
-                                        "type": "FullHorizontalListItem",
-                                        "listLength": "${payload.listTemplate2ListData.listPage.listItems.length}"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "type": "Container",
-                        "height": "100vh",
-                        "width": "100vw",
-                        "items": [
-                            {
-                                "type": "Image",
-                                "source": "${backgroundImage}",
-                                "scale": "best-fill",
-                                "width": "100vw",
-                                "height": "100vh",
-                                "position": "absolute",
-                                "opacity": 0.3
-                            },
-                            {
-                                "type": "AlexaHeader",
-                                "headerTitle": "${title}",
-                                "headerAttributionImage": "${logo}"
-                            },
-                            {
-                                "type": "Sequence",
-                                "scrollDirection": "horizontal",
-                                "paddingLeft": "@marginLeft",
-                                "paddingRight": "@marginRight",
-                                "data": "${listData}",
-                                "height": "70vh",
-                                "width": "100%",
-                                "numbered": true,
-                                "item": [
-                                    {
-                                        "type": "HorizontalListItem"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "AlexaFooter",
-                                "paddingBottom": "100",
-                                "footerHint": "${payload.listTemplate2ListData.hintText}",
-                                "position": "absolute",
-                                "top": "80vh"
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
+        "layouts": {},
         "mainTemplate": {
             "parameters": [
                 "payload"
             ],
-            "item": [
+            "items": [
                 {
-                    "type": "ListTemplate2",
-                    "backgroundImage": "${payload.listTemplate2Metadata.backgroundImage.sources[0].url}",
-                    "title": "${payload.listTemplate2Metadata.title}",
-                    "hintText": "${payload.listTemplate2Metadata.hintText}",
-                    "logo": "${payload.listTemplate2Metadata.logoUrl}",
-                    "listData": "${payload.listTemplate2ListData.listPage.listItems}"
+                    "when": "${viewport.shape == 'round'}",
+                    "type": "Container",
+                    "direction": "column",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "${payload.bodyTemplate2Data.image.sources[0].url}",
+                            "scale": "best-fill",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "position": "absolute",
+                            "overlayColor": "rgba(0, 0, 0, 0.6)"
+                        },
+                        {
+                            "type": "ScrollView",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "item": [
+                                {
+                                    "type": "Container",
+                                    "direction": "column",
+                                    "alignItems": "center",
+                                    "paddingLeft": "70dp",
+                                    "paddingRight": "70dp",
+                                    "items": [
+                                        {
+                                            "type": "AlexaHeader",
+                                            "headerAttributionImage": "${payload.bodyTemplate2Data.logoUrl}",
+                                            "headerTitle": "${payload.bodyTemplate2Data.title}"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "text": "<b>${payload.bodyTemplate2Data.textContent.title.text}</b>",
+                                            "style": "textStyleBody",
+                                            "width": "70vw",
+                                            "textAlign": "center"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "text": "${payload.bodyTemplate2Data.textContent.subtitle.text}",
+                                            "style": "textStylePrimary",
+                                            "width": "70vw",
+                                            "textAlign": "center"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "text": "${payload.bodyTemplate2Data.textContent.primaryText.text}",
+                                            "paddingTop": 20,
+                                            "style": "textStylePrimary",
+                                            "width": "70vw",
+                                            "textAlign": "center"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "${payload.bodyTemplate2Data.backgroundImage.sources[0].url}",
+                            "scale": "best-fill",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "position": "absolute",
+                            "opacity": 0.2
+                        },
+                        {
+                            "headerTitle": "${payload.bodyTemplate2Data.title}",
+                            "headerAttributionImage": "${payload.bodyTemplate2Data.logoUrl}",
+                            "type": "AlexaHeader"
+                        },
+                        {
+                            "type": "Container",
+                            "direction": "row",
+                            "paddingLeft": "60dp",
+                            "paddingRight": "72dp",
+                            "grow": 1,
+                            "shrink": 1,
+                            "height": "100vh",
+                            "items": [
+                                {
+                                    "type": "ScrollView",
+                                    "height": "100%",
+                                    "grow": 1,
+                                    "shrink": 1,
+                                    "item": [
+                                        {
+                                            "type": "Container",
+                                            "items": [
+                                                {
+                                                    "type": "Text",
+                                                    "text": "<b>${payload.bodyTemplate2Data.textContent.title.text}</b>",
+                                                    "style": "textStyleBody"
+                                                },
+                                                {
+                                                    "type": "Text",
+                                                    "text": "${payload.bodyTemplate2Data.textContent.subtitle.text}",
+                                                    "style": "textStylePrimary"
+                                                },
+                                                {
+                                                    "type": "Text",
+                                                    "text": "${payload.bodyTemplate2Data.textContent.primaryText.text}",
+                                                    "spacing": "@spacingSmall",
+                                                    "paddingTop": "40dp",
+                                                    "paddingRight": "70dp",
+                                                    "style": "textStylePrimary"
+                                                },
+                                                {
+                                                    "type": "Text",
+                                                    "text": "<b>${payload.bodyTemplate2Data.textContent.mealTitle.text}</b>",
+                                                    "style": "textStylePrimary",
+                                                    "spacing": "@spacingSmall",
+                                                    "paddingTop": "30dp"
+                                                },
+                                                {
+                                                    "type": "Text",
+                                                    "text": "- ${payload.bodyTemplate2Data.textContent.meal1.text}",
+                                                    "style": "textStylePrimary",
+                                                    "spacing": "@spacingSmall",
+                                                    "paddingTop": "10dp",
+                                                    "paddingLeft": "20dp"
+                                                },
+                                                {
+                                                    "type": "Text",
+                                                    "text": "- ${payload.bodyTemplate2Data.textContent.meal2.text}",
+                                                    "style": "textStylePrimary",
+                                                    "spacing": "@spacingSmall",
+                                                    "paddingLeft": "20dp"
+                                                },
+                                                {
+                                                    "type": "Text",
+                                                    "text": "- ${payload.bodyTemplate2Data.textContent.meal3.text}",
+                                                    "style": "textStylePrimary",
+                                                    "spacing": "@spacingSmall",
+                                                    "paddingLeft": "20dp"
+                                                },
+                                                {
+                                                    "type": "Container",
+                                                    "width": "400dp",
+                                                    "height": "80dp",
+                                                    "paddingLeft": "0dp",
+                                                    "paddingTop": "16dp",
+                                                    "paddingRight": "16dp",
+                                                    "paddingBottom": "16dp",
+                                                    "items": [
+                                                        {
+                                                            "type": "TouchWrapper",
+                                                            "item": {
+                                                                "type": "Text",
+                                                                "width": "400dp",
+                                                                "height": "80dp",
+                                                                "paddingTop": "12dp",
+                                                                "paddingBottom": "12dp",
+                                                                "textAlign": "left",
+                                                                "textAlignVertical": "top",
+                                                                "fontStyle": "italic",
+                                                                "fontSize": "24dp",
+                                                                "text": "+ View the recipes",
+                                                                "fontWeight": "bold"
+                                                            },
+                                                            "onPress": {
+                                                                "type": "SendEvent",
+                                                                "arguments": [
+                                                                    "make_recipe"
+                                                                ]
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Container",
+                                                    "width": "300dp",
+                                                    "height": "80dp",
+                                                    "paddingLeft": "0dp",
+                                                    "paddingTop": "16dp",
+                                                    "paddingRight": "16dp",
+                                                    "paddingBottom": "16dp",
+                                                    "item": [
+                                                        {
+                                                            "type": "Text",
+                                                            "width": "400dp",
+                                                            "height": "80dp",
+                                                            "paddingTop": "2dp",
+                                                            "paddingBottom": "12dp",
+                                                            "textAlign": "left",
+                                                            "textAlignVertical": "top",
+                                                            "fontStyle": "italic",
+                                                            "fontSize": "24dp",
+                                                            "text": "+ Add ingredients to list",
+                                                            "fontWeight": "bold"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Image",
+                                    "source": "${payload.bodyTemplate2Data.image.sources[0].url}",
+                                    "width": 340,
+                                    "height": 384,
+                                    "scale": "best-fit",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter",
+                            "footerHint": "${payload.bodyTemplate2Data.hintText}",
+                            "paddingBottom": "80dp"
+                        }
+                    ]
                 }
             ]
         }
     },
     "datasources": {
-        "listTemplate2Metadata": {
+        "bodyTemplate2Data": {
             "type": "object",
-            "objectId": "lt1Metadata",
+            "objectId": "bt2Sample",
             "backgroundImage": {
                 "contentDescription": null,
                 "smallSourceUrl": null,
                 "largeSourceUrl": null,
                 "sources": [
                     {
-                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/Thailand/laab.jpeg",
+                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/bg_philippines_food.jpeg",
                         "size": "small",
                         "widthPixels": 0,
                         "heightPixels": 0
                     },
                     {
-                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/Thailand/laab.jpeg",
+                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/bg_philippines_food.jpeg",
                         "size": "large",
                         "widthPixels": 0,
                         "heightPixels": 0
                     }
                 ]
             },
-            "title": "Flavors of \"Guatemala\"",
-            "logoUrl": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/APP_ICON_LARGE.png"
-        },
-        "listTemplate2ListData": {
-            "type": "list",
-            "listId": "lt2Sample",
-            "totalNumberOfItems": 10,
-            "hintText": "Try, \"Alexa, select number 1\"",
-            "listPage": {
-                "listItems": [
+            "title": "Guatemala",
+            "image": {
+                "contentDescription": null,
+                "smallSourceUrl": null,
+                "largeSourceUrl": null,
+                "sources": [
                     {
-                        "listItemIdentifier": "pepian",
-                        "ordinalNumber": 1,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "Pepían"
-                            },
-                            "secondaryText": {
-                                "type": "PlainText",
-                                "text": "Difficulty: Easy"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/Philippines/adobo.jpeg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/Philippines/adobo.jpeg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "pepian"
+                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/mealplan_guatemala.jpg",
+                        "size": "small",
+                        "widthPixels": 0,
+                        "heightPixels": 0
                     },
                     {
-                        "listItemIdentifier": "tamales",
-                        "ordinalNumber": 2,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "Guatemala Tamales"
-                            },
-                            "secondaryText": {
-                                "type": "PlainText",
-                                "text": "Difficulty: Easy"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/Philippines/sm_fishandchips.jpeg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/Philippines/sm_fishandchips.jpeg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "tamales"
-                    },
-                    {
-                        "listItemIdentifier": "subanik",
-                        "ordinalNumber": 3,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "Subaník"
-                            },
-                            "secondaryText": {
-                                "type": "PlainText",
-                                "text": "Difficulty: Easy"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/England/sm_tikka.jpeg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/England/lg_tikka.jpeg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "subanik"
-                    },
-                    {
-                        "listItemIdentifier": "dessert",
-                        "ordinalNumber": 4,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "Dessert Mole"
-                            },
-                            "secondaryText": {
-                                "type": "PlainText",
-                                "text": "Difficulty: Moderate"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/England/breakfast.jpeg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/England/breakfast.jpeg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "dessert"
+                        "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/mealplan_guatemala.jpg",
+                        "size": "large",
+                        "widthPixels": 0,
+                        "heightPixels": 0
                     }
                 ]
-            }
+            },
+            "textContent": {
+                "title": {
+                    "type": "PlainText",
+                    "text": "Mayan Meal Madness"
+                },
+                "subtitle": {
+                    "type": "PlainText",
+                    "text": "Three hearty meals to round out your week"
+                },
+                "primaryText": {
+                    "type": "PlainText",
+                    "text": "Guatemalan cuisine is more than just corn tortillas and beans. Discover some exciting new flavors with these dishes to round out your week."
+                },
+                "mealTitle": {
+                    "type": "PlainText",
+                    "text": "Main Dishes"
+                },
+                "meal1": {
+                    "type": "PlainText",
+                    "text": "Subanik"
+                },
+                "meal2": {
+                    "type": "PlainText",
+                    "text": "Pepían"
+                },
+                "meal3": {
+                    "type": "PlainText",
+                    "text": "Enchilada Guatemalteca"
+                }
+            },
+            "logoUrl": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/guatemala_icon.jpg",
+            "hintText": "Try, \"Alexa, make this recipe\""
         }
     }
 }
