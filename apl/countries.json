@@ -278,16 +278,16 @@
                             },
                             {
                                 "type": "TouchWrapper",
-                                    "item": {
-                                        "type": "Image",
-                                        "when": "${image}",
-                                        "source": "${image}",
-                                        "height": 100,
-                                        "width": 100,
-                                        "align": "top",
-                                        "spacing": 50,
-                                        "scale": "best-fit"
-                                    },
+                                "item": {
+                                    "type": "Image",
+                                    "when": "${image}",
+                                    "source": "${image}",
+                                    "height": 100,
+                                    "width": 100,
+                                    "align": "top",
+                                    "spacing": 50,
+                                    "scale": "best-fit"
+                                },
                                 "onPress": {
                                     "type": "SendEvent",
                                     "arguments": [
@@ -410,28 +410,20 @@
                             }
                         },
                         "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
                             "sources": [
                                 {
                                     "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pepian.jpeg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
+                                    "size": "small"
                                 },
                                 {
                                     "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pepian.jpeg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
+                                    "size": "large"
                                 }
                             ]
-                        },
-                        "token": "guatemala"
+                        }
                     },
                     {
-                        "listItemIdentifier": "peru",
+                        "listItemIdentifier": "Peru",
                         "ordinalNumber": 2,
                         "textContent": {
                             "primaryText": {
@@ -439,46 +431,8 @@
                                 "text": "Peru"
                             },
                             "secondaryText": {
-                                "type": "RichText",
+                                "type": "PlainText",
                                 "text": "Featured Dish: La Causa"
-                            },
-                            "tertiaryText": {
-                                "type": "PlainText",
-                                "text": "5 Recipes"
-                            }
-                        },
-                        "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
-                            "sources": [
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_lacausa.jpg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                },
-                                {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/sm_lacausa.jpg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
-                                }
-                            ]
-                        },
-                        "token": "peru"
-                    },
-                    {
-                        "listItemIdentifier": "philippines",
-                        "ordinalNumber": 3,
-                        "textContent": {
-                            "primaryText": {
-                                "type": "PlainText",
-                                "text": "Philippines"
-                            },
-                            "secondaryText": {
-                                "type": "RichText",
-                                "text": "Featured Dish: Pancit"
                             },
                             "tertiaryText": {
                                 "type": "PlainText",
@@ -486,25 +440,47 @@
                             }
                         },
                         "image": {
-                            "contentDescription": null,
-                            "smallSourceUrl": null,
-                            "largeSourceUrl": null,
                             "sources": [
                                 {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pancit.jpg",
-                                    "size": "small",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/lacausa.jpeg",
+                                    "size": "small"
                                 },
                                 {
-                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/pancit.jpg",
-                                    "size": "large",
-                                    "widthPixels": 0,
-                                    "heightPixels": 0
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/lacausa.jpeg",
+                                    "size": "large"
                                 }
                             ]
+                        }
+                    },
+                    {
+                        "listItemIdentifier": "Philippines",
+                        "ordinalNumber": 3,
+                        "textContent": {
+                            "primaryText": {
+                                "type": "PlainText",
+                                "text": "Philippines"
+                            },
+                            "secondaryText": {
+                                "type": "PlainText",
+                                "text": "Featured Dish: Chicken Adobo"
+                            },
+                            "tertiaryText": {
+                                "type": "PlainText",
+                                "text": "3 Recipes"
+                            }
                         },
-                        "token": "philippines"
+                        "image": {
+                            "sources": [
+                                {
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/adobo.jpeg",
+                                    "size": "small"
+                                },
+                                {
+                                    "url": "https://alexa-skill-faraway-food-planner.s3.amazonaws.com/images/adobo.jpeg",
+                                    "size": "large"
+                                }
+                            ]
+                        }
                     }
                 ]
             }
